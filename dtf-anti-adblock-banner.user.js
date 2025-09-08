@@ -7,7 +7,7 @@
 // @match        *://*.dtf.ru/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=dtf.ru
 // @grant        none
-// @run-at       document-start
+// @run-at       document-end
 // @updateURL    https://raw.githubusercontent.com/AriesAlex/userscripts/main/dtf-anti-adblock-banner.user.js
 // @downloadURL  https://raw.githubusercontent.com/AriesAlex/userscripts/main/dtf-anti-adblock-banner.user.js
 // ==/UserScript==

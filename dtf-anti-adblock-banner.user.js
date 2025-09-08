@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DTF Anti-AdBlock Banner
 // @namespace    https://github.com/AriesAlex/userscripts
-// @version      1.1.0
+// @version      1.2.0
 // @description  Закрывает баннер 'Вы используете блокировщик рекламы' на DTF.
 // @author       AriesAlex
 // @match        *://*.dtf.ru/*
@@ -17,8 +17,12 @@
 
     GM_addStyle(`
         .blocker-in-enter-active,
-        .blocker-in-leave-active {
+        .blocker-in-leave-active,
+        .blocker-in-enter-from,
+        .blocker-in-leave-to {
             transition: none !important;
+            opacity: 1 !important;
+            filter: none !important;
         }
     `)
 

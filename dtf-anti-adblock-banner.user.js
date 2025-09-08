@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DTF Anti-AdBlock Banner
 // @namespace    https://github.com/AriesAlex/userscripts
-// @version      1.1.0
+// @version      1.0.0
 // @description  Автоматически закрывает баннер 'Вы используете блокировщик рекламы' на DTF и убирает анимацию его появления.
 // @author       AriesAlex
 // @match        *://*.dtf.ru/*

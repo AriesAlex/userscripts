@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         DTF Anti-AdBlock Banner
 // @namespace    https://github.com/AriesAlex/userscripts
-// @version      1.0.0
-// @description  Автоматически закрывает баннер 'Вы используете блокировщик рекламы' на DTF и убирает анимацию его появления.
+// @version      1.1.0
+// @description  Закрывает баннер 'Вы используете блокировщик рекламы' на DTF.
 // @author       AriesAlex
 // @match        *://*.dtf.ru/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=dtf.ru
@@ -22,28 +22,19 @@
         }
     `)
 
-    const targetText = 'Вы используете блокировщик рекламы'
-    let pollingInterval = null
-
     const findAndCloseModal = () => {
-        const h1 = document.querySelector('.modal-overlay:not([style*="display: none"]) h1.blocker__title')
+        const h1 = document.querySelector('h1.blocker__title')
 
-        if (h1 && h1.textContent.includes(targetText)) {
-            const modalWindow = h1.closest('.modal-window')
-            if (!modalWindow) return
+        if (!h1 || h1.offsetParent === null) return
 
-            const buttonToClick = modalWindow.querySelector('button.modal-window__back') || modalWindow.querySelector('button.modal-window__close')
+        const modalWindow = h1.closest('.modal-window')
+        if (!modalWindow) return
 
-            if (buttonToClick) {
-                buttonToClick.click()
-                if (pollingInterval) {
-                    clearInterval(pollingInterval)
-                    pollingInterval = null
-                }
-                return true
-            }
+        const buttonToClick = modalWindow.querySelector('button.modal-window__back') || modalWindow.querySelector('button.modal-window__close')
+
+        if (buttonToClick) {
+            buttonToClick.click()
         }
-        return false
     }
 
     const observer = new MutationObserver(findAndCloseModal)
@@ -52,7 +43,6 @@
         subtree: true
     })
 
-    pollingInterval = setInterval(findAndCloseModal, 50)
-
+    setInterval(findAndCloseModal, 100)
     findAndCloseModal()
 })()

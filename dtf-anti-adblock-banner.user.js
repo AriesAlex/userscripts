@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         DTF Anti-AdBlock Banner
 // @namespace    https://github.com/AriesAlex/userscripts
-// @version      1.0.0
-// @description  Автоматически закрывает баннер 'Вы используете блокировщик рекламы' на DTF. Надежная версия.
+// @version      1.1.0
+// @description  Автоматически закрывает баннер 'Вы используете блокировщик рекламы' на DTF и убирает анимацию его появления.
 // @author       AriesAlex
 // @match        *://*.dtf.ru/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=dtf.ru
-// @grant        none
+// @grant        GM_addStyle
 // @run-at       document-end
 // @updateURL    https://raw.githubusercontent.com/AriesAlex/userscripts/main/dtf-anti-adblock-banner.user.js
 // @downloadURL  https://raw.githubusercontent.com/AriesAlex/userscripts/main/dtf-anti-adblock-banner.user.js
@@ -14,6 +14,13 @@
 
 (() => {
     'use strict'
+
+    GM_addStyle(`
+        .blocker-in-enter-active,
+        .blocker-in-leave-active {
+            transition: none !important;
+        }
+    `)
 
     const targetText = 'Вы используете блокировщик рекламы'
     let pollingInterval = null
@@ -45,7 +52,7 @@
         subtree: true
     })
 
-    pollingInterval = setInterval(findAndCloseModal, 500)
+    pollingInterval = setInterval(findAndCloseModal, 50)
 
     findAndCloseModal()
 })()

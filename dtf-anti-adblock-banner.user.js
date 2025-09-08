@@ -22,9 +22,13 @@
 
         for (const h1 of h1Elements) {
             if (h1.textContent.includes(targetText)) {
-                const closeButton = h1.closest('.modal-window')?.querySelector('button.modal-window__close')
-                if (closeButton) {
-                    closeButton.click()
+                const modalWindow = h1.closest('.modal-window')
+                if (!modalWindow) continue
+
+                const buttonToClick = modalWindow.querySelector('button.modal-window__back') || modalWindow.querySelector('button.modal-window__close')
+
+                if (buttonToClick) {
+                    buttonToClick.click()
                     return
                 }
             }
@@ -38,6 +42,5 @@
         subtree: true
     })
 
-    // Проверяем наличие окна сразу при запуске
     findAndCloseModal()
 })()
